@@ -1,6 +1,10 @@
 from sklearn.datasets import fetch_openml
 import numpy as np
 import matplotlib.pyplot as plt
+from src.neural_network import NeuralNetwork
+
+nn = NeuralNetwork()
+nn.print_shapes()
 
 mnist = fetch_openml(
     "mnist_784", 
