@@ -1,4 +1,5 @@
 import numpy as np
+from src.activations import relu, softmax
 
 class NeuralNetwork:
     def __init__(self, input_size=784, hidden_size=32, output_size=10):
@@ -11,6 +12,16 @@ class NeuralNetwork:
         #hidden -> output layer
         self.W2 = randomNumber.standard_normal((hidden_size, output_size)) * np.sqrt(1 / hidden_size)
         self.b2 = np.zeros((1, output_size))
+
+    def forward(self, X):
+        #hidden layer
+        self.Z1 = X @ self.W1 + self.b1
+        self.A1 = relu(self.Z1)
+
+        #output layer
+        self.Z2 = self.A1 @ self.W2 + self.b2
+        self.A2 = softmax(self.Z2)
+        return self.A2
     
     def print_shapes(self):
         print("W1 shape:", self.W1.shape)
