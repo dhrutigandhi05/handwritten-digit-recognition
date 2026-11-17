@@ -19,12 +19,19 @@ X_test = X[60000:]
 y_test = y[60000:]
 model = NeuralNetwork()
 sample_images = X_train[:5]
+sample_labels = y_train[:5]
 probabilities = model.forward(sample_images)
 predictions = np.argmax(probabilities, axis=1)
-loss = categorical_cross_entropy(y_train[:5], probabilities)
+loss = categorical_cross_entropy(sample_labels, probabilities)
+model.backward(sample_images, sample_labels)
 
-print("output shape:", probabilities.shape)
-print("predictions:", predictions)
-print("actual labels:", y_train[:5])
-print("probability sums:", probabilities.sum(axis=1))
-print("Categorical cross-entropy loss:", loss)
+print("Predictions:", predictions)
+print("Actual labels:", sample_labels)
+print("Loss:", loss)
+print("\nGradient shapes:")
+print("dW1:", model.dW1.shape)
+print("db1:", model.db1.shape)
+print("dW2:", model.dW2.shape)
+print("db2:", model.db2.shape)
+print("\nSample gradients:")
+print(model.dW2[:3, :3])
