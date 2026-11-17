@@ -34,6 +34,14 @@ class NeuralNetwork:
         self.dW1 = X.T @ dZ1
         self.db1 = np.sum(dZ1, axis=0, keepdims=True)
 
+    def update_parameters(self, learning_rate):
+        # update hidden layer
+        self.W1 -= learning_rate * self.dW1
+        self.b1 -= learning_rate * self.db1
+
+        # update output layer
+        self.W2 -= learning_rate * self.dW2
+        self.b2 -= learning_rate * self.db2
     
     def print_shapes(self):
         print("W1 shape:", self.W1.shape)
