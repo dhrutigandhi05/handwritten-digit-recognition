@@ -42,7 +42,23 @@ class NeuralNetwork:
         # update output layer
         self.W2 -= learning_rate * self.dW2
         self.b2 -= learning_rate * self.db2
-    
+
+    def save(self, filepath):
+        np.savez(
+            filepath,
+            W1=self.W1,
+            b1=self.b1,
+            W2=self.W2,
+            b2=self.b2
+        )
+
+    def load(self, filepath):
+        with np.load(filepath) as data:
+            self.W1 = data["W1"].copy()
+            self.b1 = data["b1"].copy()
+            self.W2 = data["W2"].copy()
+            self.b2 = data["b2"].copy()
+
     def print_shapes(self):
         print("W1 shape:", self.W1.shape)
         print("b1 shape:", self.b1.shape)

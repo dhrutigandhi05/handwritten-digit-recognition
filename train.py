@@ -1,4 +1,5 @@
 import numpy as np
+from pathlib import Path
 import matplotlib.pyplot as plt
 from sklearn.datasets import fetch_openml
 from src.neural_network import NeuralNetwork
@@ -59,3 +60,7 @@ plt.xlabel("Epoch")
 plt.ylabel("Loss")
 plt.title("Training Loss")
 plt.show()
+
+Path("models").mkdir(exist_ok=True)
+model.save("models/mnist_model.npz")
+print("model saved")
